@@ -28,7 +28,7 @@ function App() {
   const generateOrder = async (item) => {
     setOrderLoading(true);
     try {
-      const response = await axios.post('https://api-v2.play.holacash.mx/v2/order',
+      const response = await axios.post('https://live.api.play.holacash.mx/v2/order',
       {
         order_total_amount: {
           amount: item.price,
@@ -85,7 +85,7 @@ function App() {
         </Dropdown>
           <div id="instant-holacash-checkout-button">
           {!orderLoading && orderId ? (
-            <object id="checkout-button" data={`https://api-v2.play.holacash.mx/v2/checkout/button?public_key=${merchantPublicKey}`} />
+            <object id="checkout-button" data={`https://live.api.play.holacash.mx/v2/checkout/button?public_key=${merchantPublicKey}`} />
           ) : null}
           </div>
       </header>
