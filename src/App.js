@@ -48,9 +48,10 @@ function App() {
         setOrderId(response?.data?.order_information?.order_id);
         console.log('ORDER ID:', response?.data?.order_information?.order_id);
         const callbacks = {
-          onSuccess: (res) => alert(JSON.stringify(res)),
-          onAbort: () => alert('onAbort callback'),
-          onError: (err) => alert(JSON.stringify(err))
+          onSuccess: (res) => console.log(JSON.stringify(res)),
+          onAbort: () => console.log('onAbort callback'),
+          onError: (err) => console.log(JSON.stringify(err)),
+          onLoaded: (res) => console.log('onLoaded', res),
         };
         // eslint-disable-next-line no-undef
         HolaCashCheckout.configure({ order_id: response?.data?.order_information?.order_id}, callbacks);
