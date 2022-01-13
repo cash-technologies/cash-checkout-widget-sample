@@ -6,7 +6,7 @@ To have more information on how to integrate with our checkout widget visit [Qui
 
 - Add the Pay button object from the quickguide where you want to load it. Review App.js
 
-- Create an order before loading the Widget [Creating order](https://developers.holacash.mx/openapi/cash/)
+- Create an order before loading the Widget [Creating order](https://developers.holacash.mx/openapi/cash/#tag/order)
 
 - Finally pass the order when initializing the widget
 
@@ -27,3 +27,5 @@ You may also see any lint errors in the console.
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+atributions: Flaticon
