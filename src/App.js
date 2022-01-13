@@ -4,6 +4,7 @@ import './App.css';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Dropdown } from 'react-bootstrap';
+import { setMetaData } from './api/axios-service';
 
 const merchantPublicKey = 'pub_play_SXqG7wPG.VdFvcWF5Pvii3HD3RV32Qj9IIs7w3MX4';
 
@@ -19,6 +20,10 @@ function App() {
   const [orderId, setOrderId] = useState();
   const [orderLoading, setOrderLoading] = useState(false);
   
+  useEffect(() => {
+    setMetaData();
+  }, []);
+
   const onChangeItem = (index) => {
     const item = menu[index];
     setSelectedMenuItem(item);
@@ -39,7 +44,6 @@ function App() {
       {
         headers: {
           'X-Api-Client-Key': merchantPublicKey,
-          'X-Cash-Anti-Fraud-Metadata': 'fZGVwdGgiIDoiMTIzIgp9', // NOTE: To be removed. Merchant should not be required to send this.
           'Content-Type': 'application/json',
         }
       });
