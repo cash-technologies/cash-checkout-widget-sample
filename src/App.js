@@ -51,7 +51,7 @@ function App() {
     );
   };
 
-  // Creating an order https://developers.holacash.mx/openapi/cash/
+  // Creating an order https://developers.holacash.mx/openapi/cash/#tag/order
   const generateOrder = async (item) => {
     setOrderLoading(true);
     try {
