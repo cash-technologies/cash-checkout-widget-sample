@@ -1,5 +1,6 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable jsx-a11y/alt-text */
 import React, { useEffect, useState } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -55,7 +56,6 @@ function App() {
   const generateOrder = async (item) => {
     setOrderLoading(true);
     try {
-      //create order endpoint
       const response = await axios.post(
         "https://live.api.play.holacash.mx/v2/order",
         {
@@ -105,7 +105,7 @@ function App() {
         </a>
         <p>Select a pizza to place your order</p>
 
-        <DropdownMenu></DropdownMenu>
+        <DropdownMenu />
 
         {/* Creating Button object  */}
         <div id="instant-holacash-checkout-button">
