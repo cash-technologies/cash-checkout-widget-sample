@@ -15,7 +15,16 @@ export const setAxiosMetadataHeader = (() => {
 })();
 
 export const setMetaData = async () => {
-    const BatteryManager = await window.navigator.getBattery();
+    let batteryData = {};
+    try {
+      const BatteryManager = await window.navigator.getBattery();
+      batteryData = {
+        [METADATA_KEYS.BATTERY_LEVEL]: BatteryManager.level,
+        [METADATA_KEYS.IS_BATTERY_CHARGING]: BatteryManager.charging,
+      };
+    } catch (e) {
+      // TODO: handle error
+    }
 
     const res = await axios.get('https://geolocation-db.com/json/')
     const ipAddress = res?.data?.IPv4;
@@ -25,8 +34,7 @@ export const setMetaData = async () => {
         [METADATA_KEYS.IP_ADDRESS]: ipAddress,
         [METADATA_KEYS.USER_AGENT]: navigator.userAgent,
         [METADATA_KEYS.IS_CONNECTED_TO_WIFI]: navigator.onLine,
-        [METADATA_KEYS.BATTERY_LEVEL]: BatteryManager.level,
-        [METADATA_KEYS.IS_BATTERY_CHARGING]: BatteryManager.charging
+        ...batteryData,
     };
 
     // eslint-disable-next-line no-unused-vars
