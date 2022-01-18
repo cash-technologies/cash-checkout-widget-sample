@@ -6,6 +6,8 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Dropdown } from "react-bootstrap";
 import { setMetaData } from "./api/axios-service";
+import Modal from 'react-modal';
+import Receipt from "./receipt";
 
 const merchantPublicKey = "pub_play_SXqG7wPG.VdFvcWF5Pvii3HD3RV32Qj9IIs7w3MX4";
 
@@ -24,6 +26,9 @@ function App() {
   useEffect(() => {
     setMetaData();
   }, []);
+
+  const [receiptVisible, setReceiptVisible] = useState(false);
+  const [successResponse, setSuccessResponse] = useState('');
 
   const onChangeItem = (index) => {
     const item = menu[index];
@@ -80,9 +85,13 @@ function App() {
         setOrderId(response?.data?.order_information?.order_id);
         console.log("ORDER ID:", response?.data?.order_information?.order_id);
         const callbacks = {
-          onSuccess: (res) => console.log(JSON.stringify(res)),
-          onAbort: () => console.log("onAbort callback"),
-          onError: (err) => console.log(JSON.stringify(err)),
+          onSuccess: (res) => {
+            setSuccessResponse(JSON.parse(res))
+            setReceiptVisible(true)
+            console.log('onSuccess', JSON.parse(res))
+          },
+          onAbort: () => alert('onAbort callback'),
+          onError: (err) => alert(JSON.stringify(err))
         };
 
         // Initializing widget with order information
@@ -117,6 +126,13 @@ function App() {
           ) : null}
         </div>
       </header>
+      <Modal isOpen={receiptVisible} className="receipt">
+        <Receipt response={successResponse} />
+        <div style={{ display: 'flex', flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+          <button type="button" style={{ borderRadius: 8, backgroundColor: '#424242', color: 'white', padding: 6 }}
+            onClick={() => { setReceiptVisible(false) }}>Done</button>
+        </div>
+      </Modal>
     </div>
   );
 }
