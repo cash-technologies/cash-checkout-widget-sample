@@ -28,6 +28,7 @@ export const METADATA_KEYS = {
     BROWSER_VERSION: "browser_version",
     URL_DOMAIN_NAME: "url_domain_name",
     BROWSER_TIMEZONE: "browser_timezone",
+    TIME_ZONE: "user_timezone",
     SCREEN_RESOLUTION: "screen_resolution",
     SCREEN_WIDTH: "screen_width",
     SCREEN_HEIGHT: "screen_height",

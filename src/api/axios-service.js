@@ -2,6 +2,7 @@ import axios from "axios";
 import { API_HEADER_KEYS, METADATA_KEYS } from "./constants/variable";
 import base64 from "./utils/base64";
 import { v4 as uuidv4 } from 'uuid';
+import { createDateOffset } from '../api/utils';
 
 axios.defaults.headers.common["Content-Type"] = "application/json";
 axios.defaults.headers.common.Accept = "application/json";
@@ -29,11 +30,14 @@ export const setMetaData = async () => {
     const res = await axios.get('https://geolocation-db.com/json/')
     const ipAddress = res?.data?.IPv4;
 
+    const timeZoneData = createDateOffset(new Date());
+
     const fraudMetadata = {
         [METADATA_KEYS.DEVICE_ID]: MediaDeviceInfo.deviceId || uuidv4(),
         [METADATA_KEYS.IP_ADDRESS]: ipAddress,
         [METADATA_KEYS.USER_AGENT]: navigator.userAgent,
         [METADATA_KEYS.IS_CONNECTED_TO_WIFI]: navigator.onLine,
+        [METADATA_KEYS.TIME_ZONE]: timeZoneData,
         ...batteryData,
     };
 
