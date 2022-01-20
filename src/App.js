@@ -90,8 +90,8 @@ function App() {
             setReceiptVisible(true)
             console.log('onSuccess', JSON.parse(res))
           },
-          onAbort: () => alert('onAbort callback'),
-          onError: (err) => alert(JSON.stringify(err))
+          onAbort: () => console.log('onAbort callback'),
+          onError: (err) => console.log(JSON.stringify(err))
         };
 
         // Initializing widget with order information
