@@ -9,7 +9,7 @@ import { setMetaData } from "./api/axios-service";
 import Modal from 'react-modal';
 import Receipt from "./receipt";
 
-const merchantPublicKey = "pub_play_SXqG7wPG.VdFvcWF5Pvii3HD3RV32Qj9IIs7w3MX4";
+const merchantPublicKey = "pub_sandbox_N3JQzyuR.VXjgMrW90DWWfwbd2eerxDA3mSG7uVdR";
 
 export const menu = [
   { id: 1, name: "Margherita Pizza", price: 599 },
@@ -62,7 +62,7 @@ function App() {
     setOrderLoading(true);
     try {
       const response = await axios.post(
-        "https://live.api.play.holacash.mx/v2/order",
+        "https://sandbox.api.holacash.mx/v2/order",
         {
           order_total_amount: {
             amount: item.price,
@@ -121,7 +121,7 @@ function App() {
           {!orderLoading && orderId ? (
             <object
               id="checkout-button"
-              data={`https://live.api.play.holacash.mx/v2/checkout/button?public_key=${merchantPublicKey}`}
+              data={`https://sandbox.api.holacash.mx/v2/checkout/button?public_key=${merchantPublicKey}`}
             />
           ) : null}
         </div>
