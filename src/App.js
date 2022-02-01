@@ -6,10 +6,11 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Dropdown } from "react-bootstrap";
 import { setMetaData } from "./api/axios-service";
-import Modal from 'react-modal';
+import Modal from "react-modal";
 import Receipt from "./receipt";
 
-const merchantPublicKey = "pub_play_SXqG7wPG.VdFvcWF5Pvii3HD3RV32Qj9IIs7w3MX4";
+const merchantPublicKey =
+  "pub_sandbox_N3JQzyuR.VXjgMrW90DWWfwbd2eerxDA3mSG7uVdR";
 
 export const menu = [
   { id: 1, name: "Margherita Pizza", price: 599 },
@@ -28,7 +29,7 @@ function App() {
   }, []);
 
   const [receiptVisible, setReceiptVisible] = useState(false);
-  const [successResponse, setSuccessResponse] = useState('');
+  const [successResponse, setSuccessResponse] = useState("");
 
   const onChangeItem = (index) => {
     const item = menu[index];
@@ -62,7 +63,7 @@ function App() {
     setOrderLoading(true);
     try {
       const response = await axios.post(
-        "https://live.api.play.holacash.mx/v2/order",
+        "https://sandbox.api.holacash.mx/v2/order",
         {
           order_total_amount: {
             amount: item.price,
@@ -86,12 +87,12 @@ function App() {
         console.log("ORDER ID:", response?.data?.order_information?.order_id);
         const callbacks = {
           onSuccess: (res) => {
-            setSuccessResponse(JSON.parse(res))
-            setReceiptVisible(true)
-            console.log('onSuccess', JSON.parse(res))
+            setSuccessResponse(JSON.parse(res));
+            setReceiptVisible(true);
+            console.log("onSuccess", JSON.parse(res));
           },
-          onAbort: () => alert('onAbort callback'),
-          onError: (err) => alert(JSON.stringify(err))
+          onAbort: () => console.log("onAbort callback"),
+          onError: (err) => console.log(JSON.stringify(err)),
         };
 
         // Initializing widget with order information
@@ -121,16 +122,35 @@ function App() {
           {!orderLoading && orderId ? (
             <object
               id="checkout-button"
-              data={`https://live.api.play.holacash.mx/v2/checkout/button?public_key=${merchantPublicKey}`}
+              data={`https://sandbox.api.holacash.mx/v2/checkout/button?public_key=${merchantPublicKey}`}
             />
           ) : null}
         </div>
       </header>
       <Modal isOpen={receiptVisible} className="receipt">
         <Receipt response={successResponse} />
-        <div style={{ display: 'flex', flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-          <button type="button" style={{ borderRadius: 8, backgroundColor: '#424242', color: 'white', padding: 6 }}
-            onClick={() => { setReceiptVisible(false) }}>Done</button>
+        <div
+          style={{
+            display: "flex",
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <button
+            type="button"
+            style={{
+              borderRadius: 8,
+              backgroundColor: "#424242",
+              color: "white",
+              padding: 6,
+            }}
+            onClick={() => {
+              setReceiptVisible(false);
+            }}
+          >
+            Done
+          </button>
         </div>
       </Modal>
     </div>
