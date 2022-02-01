@@ -146,15 +146,14 @@ export default function Home() {
       <Modal isOpen={receiptVisible} className="receipt">
         <Receipt response={successResponse} />
         <div className="mx-auto text-center py-3">
-          <button
-            type="button"
+          <div
             className="btn btn-dark mx-auto"
             onClick={() => {
               setReceiptVisible(false);
             }}
           >
             Done
-          </button>
+          </div>
         </div>
       </Modal>
     </div>
