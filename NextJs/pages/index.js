@@ -32,6 +32,9 @@ export default function Home() {
     generateOrder(item);
   };
 
+  useEffect(() => {
+    console.log("ORDER LOAD", orderLoading);
+  }, [orderLoading]);
   // Dropdown Menu React Logic
   const DropdownMenu = () => {
     return (
@@ -54,17 +57,17 @@ export default function Home() {
   };
 
   // Creating an order https://developers.holacash.mx/openapi/cash/#tag/order
-  const generateOrder = async () => {
+  const generateOrder = async (item) => {
     setOrderLoading(true);
     try {
       const response = await axios.post(
         "https://sandbox.api.holacash.mx/v2/order",
         {
           order_total_amount: {
-            amount: 450,
+            amount: item.price,
             currency_code: "MXN",
           },
-          description: "Pizza",
+          description: item.name,
         },
         {
           headers: {
@@ -73,7 +76,7 @@ export default function Home() {
           },
         }
       );
-
+      console.log(response);
       setOrderLoading(false);
 
       // verifying correct response from create order
@@ -82,6 +85,8 @@ export default function Home() {
         console.log("ORDER ID:", response?.data?.order_information?.order_id);
         const callbacks = {
           onSuccess: (res) => {
+            setSuccessResponse(JSON.parse(res));
+            setReceiptVisible(true);
             console.log("onSuccess", JSON.parse(res));
           },
           onAbort: () => console.log("onAbort callback"),
@@ -109,8 +114,8 @@ export default function Home() {
       </Head>
       {/* adding Script using Next Script*/}
       <Script
-        src="https://widget.connect.play.holacash.mx/connect.min.js"
-        data-public-key="pub_sandbox_96qsBHrP.IIVG6xPaGkLIneXeekspk9muIAfYaesn"
+        src="https://widget.connect.sandbox.holacash.mx/connect.min.js"
+        data-public-key={merchantPublicKey}
         id="holacash-connect"
         strategy="beforeInteractive"
       />
