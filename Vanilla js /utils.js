@@ -44,13 +44,22 @@ const generateOrder = async (item) => {
     if (response?.data?.order_information?.order_id) {
       let orderId = response?.data?.order_information?.order_id;
       console.log("ORDER ID:", response?.data?.order_information?.order_id);
+
+      //callbacks can be passed into the widget configuration this are triggered whenever a certain event happens.
+
       const callbacks = {
+        //onSuccess happens when a charge is created correctly.
+
         onSuccess: (res) => {
           console.log("Success response", JSON.parse(res));
           showReceipt(JSON.parse(res));
           console.log("onSuccess", JSON.parse(res));
         },
+        //onAbort happens when the users intentionally close the widget
+
         onAbort: () => alert("Widget is closing"),
+        //on Error happens when the holacash service cannot succesfully generate a charge correctly at that moment
+
         onError: (err) => alert(JSON.stringify(err)),
       };
 

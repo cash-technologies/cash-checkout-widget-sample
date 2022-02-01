@@ -58,7 +58,8 @@ table {
   width: 100%;
 }
 
-td, th {
+td,
+th {
   border: 1px solid #dddddd;
   text-align: left;
   padding: 8px;
@@ -68,7 +69,22 @@ tr:nth-child(even) {
   background-color: #dddddd;
 }
 
-.button{
+.button {
   margin-top: 5%;
   margin-left: 90%;
+}
+
+.styledButton {
+  margin-top: 20px;
+  border-radius: 8;
+  background-color: "#424242";
+  color: "white";
+  padding: 6;
+}
+
+.buttonContainer {
+  display: "flex";
+  flex: 1;
+  align-items: "center";
+  justify-content: "center";
 }
