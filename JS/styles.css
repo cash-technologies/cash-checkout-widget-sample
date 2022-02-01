@@ -4,7 +4,9 @@ body {
 
 #receipt {
   display: none;
-  color: white;
+  color: black;
+  background-color: white;
+  z-index: 100;
 }
 .title {
   color: #61dafb;
