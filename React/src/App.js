@@ -144,7 +144,6 @@ function App() {
         <Receipt response={successResponse} />
         <div className="mx-auto text-center py-3">
           <button
-            type="button"
             className="btn btn-dark mx-auto"
             onClick={() => {
               setReceiptVisible(false);
