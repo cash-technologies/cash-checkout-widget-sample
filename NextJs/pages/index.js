@@ -7,6 +7,12 @@ import Modal from "react-modal";
 import Receipt from "../components/receipt";
 import { Dropdown } from "react-bootstrap";
 
+// Base url for holacash api environment
+const holacashApiBaseUrl = "https://sandbox.api.holacash.mx/v2";
+
+const holacashConnectWidgetScript =
+  "https://widget.connect.sandbox.holacash.mx/connect.min.js";
+
 // Copy and paste your key here to use it in all configs across this sample site
 const merchantPublicKey =
   "pub_sandbox_N3JQzyuR.VXjgMrW90DWWfwbd2eerxDA3mSG7uVdR"; // public key
@@ -62,7 +68,7 @@ export default function Home() {
     setOrderLoading(true);
     try {
       const response = await axios.post(
-        "https://sandbox.api.holacash.mx/v2/order",
+        holacashApiBaseUrl + "/order",
         {
           order_total_amount: {
             amount: item.price,
@@ -119,7 +125,7 @@ export default function Home() {
       </Head>
       {/* adding Script using Next Script*/}
       <Script
-        src="https://widget.connect.sandbox.holacash.mx/connect.min.js"
+        src={holacashConnectWidgetScript}
         data-public-key={merchantPublicKey}
         id="holacash-connect"
         strategy="beforeInteractive"
@@ -138,7 +144,7 @@ export default function Home() {
           {!orderLoading && orderId ? (
             <object
               id="checkout-button"
-              data={`https://sandbox.api.holacash.mx/v2/checkout/button?public_key=${merchantPublicKey}`}
+              data={`${holacashApiBaseUrl}/checkout/button?public_key=${merchantPublicKey}`}
             />
           ) : null}
         </div>

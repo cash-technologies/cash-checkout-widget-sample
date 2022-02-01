@@ -9,6 +9,9 @@ import { setMetaData } from "./api/axios-service";
 import Modal from "react-modal";
 import Receipt from "./receipt";
 
+// Base url for holacash api environment
+const holacashApiBaseUrl = "https://sandbox.api.holacash.mx/v2";
+
 const merchantPublicKey =
   "pub_sandbox_N3JQzyuR.VXjgMrW90DWWfwbd2eerxDA3mSG7uVdR";
 
@@ -63,7 +66,7 @@ function App() {
     setOrderLoading(true);
     try {
       const response = await axios.post(
-        "https://sandbox.api.holacash.mx/v2/order",
+        holacashApiBaseUrl + "/order",
         {
           order_total_amount: {
             amount: item.price,
@@ -132,7 +135,7 @@ function App() {
           {!orderLoading && orderId ? (
             <object
               id="checkout-button"
-              data={`https://sandbox.api.holacash.mx/v2/checkout/button?public_key=${merchantPublicKey}`}
+              data={`${holacashApiBaseUrl}/checkout/button?public_key=${merchantPublicKey}`}
             />
           ) : null}
         </div>
