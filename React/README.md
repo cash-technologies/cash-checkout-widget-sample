@@ -10,6 +10,11 @@ To have more information on how to integrate with our checkout widget visit [Qui
 
 - Finally pass the order when initializing the widget
 
+- Callback functions can be passed to the widget when initializing it.
+  onSuccess: happens when a charge is created correctly.
+  onAbort: happens when the users intentionally close the widget
+  onError: happens when the holacash service cannot succesfully generate a charge correctly at that moment
+
 # Running this demo project
 
 This project was created with [Create React App](https://github.com/facebook/create-react-app).
