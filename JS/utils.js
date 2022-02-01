@@ -23,7 +23,7 @@ const menu = [
 const generateOrder = async (item) => {
   try {
     const response = await axios.post(
-      "https://live.api.play.holacash.mx/v2/order",
+      "https://sandbox.api.holacash.mx/v2/order",
       {
         order_total_amount: {
           amount: item.price,
@@ -34,7 +34,7 @@ const generateOrder = async (item) => {
       {
         headers: {
           "X-Api-Client-Key":
-            "pub_play_SXqG7wPG.VdFvcWF5Pvii3HD3RV32Qj9IIs7w3MX4",
+            "pub_sandbox_N3JQzyuR.VXjgMrW90DWWfwbd2eerxDA3mSG7uVdR",
           "Content-Type": "application/json",
         },
       }
@@ -74,6 +74,8 @@ function showReceipt(res) {
   console.log(res);
   if (res.charge) {
     document.getElementById("receipt").style.display = "block";
+    document.getElementById("instant-holacash-checkout-button").style.display =
+      "none";
   }
   document.getElementById("chargeId").innerHTML = res.id;
   document.getElementById("statusResponse").innerHTML =
@@ -83,6 +85,12 @@ function showReceipt(res) {
   document.getElementById("email").innerHTML =
     res?.charge?.consumer_details?.contact?.email;
   document.getElementById("description").innerHTML = res?.charge?.description;
+}
+
+function closeReceipt() {
+  document.getElementById("receipt").style.display = "none";
+  document.getElementById("instant-holacash-checkout-button").style.display =
+    "block";
 }
 
 // shows widgetButton when order is ready
