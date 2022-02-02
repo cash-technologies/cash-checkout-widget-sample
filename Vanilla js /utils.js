@@ -57,7 +57,12 @@ const generateOrder = async (item) => {
         },
         //onAbort happens when the users intentionally close the widget
 
-        onAbort: () => alert("Widget is closing"),
+        onAbort: () => {
+          alert("Widget is closing");
+          document.getElementById(
+            "instant-holacash-checkout-button"
+          ).style.display = "none";
+        },
         //on Error happens when the holacash service cannot succesfully generate a charge correctly at that moment
 
         onError: (err) => alert(JSON.stringify(err)),
