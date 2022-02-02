@@ -9,6 +9,9 @@ import { setMetaData } from "./api/axios-service";
 import Modal from "react-modal";
 import Receipt from "./receipt";
 
+// Base url for holacash api environment
+const holacashApiBaseUrl = "https://sandbox.api.holacash.mx/v2";
+
 const merchantPublicKey =
   "pub_sandbox_N3JQzyuR.VXjgMrW90DWWfwbd2eerxDA3mSG7uVdR";
 
@@ -63,7 +66,7 @@ function App() {
     setOrderLoading(true);
     try {
       const response = await axios.post(
-        "https://sandbox.api.holacash.mx/v2/order",
+        holacashApiBaseUrl + "/order",
         {
           order_total_amount: {
             amount: item.price,
@@ -85,13 +88,21 @@ function App() {
       if (response?.data?.order_information?.order_id) {
         setOrderId(response?.data?.order_information?.order_id);
         console.log("ORDER ID:", response?.data?.order_information?.order_id);
+        //callbacks can be passed into the widget configuration this are triggered whenever a certain event happens.
+
         const callbacks = {
+          //onSuccess happens when a charge is created correctly.
+
           onSuccess: (res) => {
             setSuccessResponse(JSON.parse(res));
             setReceiptVisible(true);
             console.log("onSuccess", JSON.parse(res));
           },
+          //onAbort happens when the users intentionally close the widget
+
           onAbort: () => console.log("onAbort callback"),
+          //on Error happens when the holacash service cannot succesfully generate a charge correctly at that moment
+
           onError: (err) => console.log(JSON.stringify(err)),
         };
 
@@ -119,32 +130,21 @@ function App() {
 
         {/* Creating Button object  */}
         <div id="instant-holacash-checkout-button">
+          {/* The checkout widget requires an order id this is why we the button after knowing the order.*/}
+
           {!orderLoading && orderId ? (
             <object
               id="checkout-button"
-              data={`https://sandbox.api.holacash.mx/v2/checkout/button?public_key=${merchantPublicKey}`}
+              data={`${holacashApiBaseUrl}/checkout/button?public_key=${merchantPublicKey}`}
             />
           ) : null}
         </div>
       </header>
       <Modal isOpen={receiptVisible} className="receipt">
         <Receipt response={successResponse} />
-        <div
-          style={{
-            display: "flex",
-            flex: 1,
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
+        <div className="mx-auto text-center py-3">
           <button
-            type="button"
-            style={{
-              borderRadius: 8,
-              backgroundColor: "#424242",
-              color: "white",
-              padding: 6,
-            }}
+            className="btn btn-dark mx-auto"
             onClick={() => {
               setReceiptVisible(false);
             }}

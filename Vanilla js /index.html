@@ -43,29 +43,9 @@
     >
       <div class="title py-2">Avinash Pizza</div>
       <p class="subtitle py-2">Select a pizza to place your order</p>
-
-      <div class="dropdown">
-        <button onclick="displayDropdown()" class="dropbtn" id="selectedName">
-          Choose a Pizza
-        </button>
-        <div id="myDropdown" class="dropdown-content">
-          <button href="#" id="1" onclick="updateSelected(0)">
-            Margherita - $5.99
-          </button>
-          <button href="#" id="2" onclick="updateSelected(1)">
-            Marinara - $6.99
-          </button>
-          <button href="#" id="3" onclick="updateSelected(2)">
-            Hawaiian - $6.49
-          </button>
-          <button href="#" id="4" onclick="updateSelected(3)">
-            Pepperoni - $7.49
-          </button>
-        </div>
-      </div>
-      <div class="py-4" id="receipt">
-        <h3>Payment receipt</h3>
-        <table>
+      <div class="py-5 w-100 bg-light h-100 p-5" id="receipt">
+        <h1>Payment receipt</h1>
+        <table class="table table-striped">
           <tr class="py-4">
             <td>Transaction ID</td>
             <td id="chargeId"></td>
@@ -88,12 +68,32 @@
           </tr>
         </table>
         <button
-          class="btn btn-primary mx-auto d-block py-2"
+          class="btn btn-dark mx-auto d-block py-2"
           onclick="closeReceipt()"
         >
-          Close
+          Done
         </button>
       </div>
+      <div class="dropdown">
+        <button onclick="displayDropdown()" class="dropbtn" id="selectedName">
+          Choose a Pizza
+        </button>
+        <div id="myDropdown" class="dropdown-content">
+          <button href="#" id="1" onclick="updateSelected(0)">
+            Margherita - $5.99
+          </button>
+          <button href="#" id="2" onclick="updateSelected(1)">
+            Marinara - $6.99
+          </button>
+          <button href="#" id="3" onclick="updateSelected(2)">
+            Hawaiian - $6.49
+          </button>
+          <button href="#" id="4" onclick="updateSelected(3)">
+            Pepperoni - $7.49
+          </button>
+        </div>
+      </div>
+
       <div class="py-4" id="instant-holacash-checkout-button">
         <object
           id="checkout-button"
