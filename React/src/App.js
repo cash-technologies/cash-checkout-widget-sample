@@ -129,9 +129,13 @@ function App() {
         <DropdownMenu />
 
         {/* Creating Button object  */}
-        <div
-          id="checkout-button"
-          data-disabled={orderLoading || !orderId } />
+        <div id="instant-holacash-checkout-button">
+          <object
+            id="checkout-button"
+            data={`${holacashApiBaseUrl}/checkout/button?public_key=${merchantPublicKey}`}
+            data-disabled={orderLoading || !orderId }
+          />
+        </div>
       </header>
       <Modal isOpen={receiptVisible} className="receipt">
         <Receipt response={successResponse} />
