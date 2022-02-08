@@ -96,8 +96,6 @@ function showReceipt(res) {
     res?.status_details?.status;
   document.getElementById("amount").innerHTML =
     Number(res?.charge?.amount_details?.amount) / 100;
-  document.getElementById("email").innerHTML =
-    res?.charge?.consumer_details?.contact?.email;
   document.getElementById("description").innerHTML = res?.charge?.description;
 }
 
