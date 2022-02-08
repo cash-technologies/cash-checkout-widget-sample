@@ -153,6 +153,8 @@ th {
   border: 1px solid #dddddd;
   text-align: left;
   padding: 8px;
+  white-space: pre-line;
+  word-break: break-word;
 }
 
 tr:nth-child(even) {

@@ -2,17 +2,12 @@ import React, { useState, useEffect } from "react";
 
 const Receipt = ({ response }) => {
   const [amount, setAmount] = useState("");
-  const [email, setEmail] = useState("");
 
   useEffect(() => {
     if (!response && !Object.keys(response).length) return;
     const responseAmount = response?.charge?.amount_details?.amount;
     if (responseAmount) {
       setAmount(Number(responseAmount) / 100);
-    }
-    const responseEmail = response?.charge?.consumer_details?.contact?.email;
-    if (responseEmail) {
-      setEmail(responseEmail);
     }
   }, [response]);
 
@@ -38,10 +33,6 @@ const Receipt = ({ response }) => {
           <tr>
             <td>Amount</td>
             <td>{amount}</td>
-          </tr>
-          <tr>
-            <td>Email</td>
-            <td>{email}</td>
           </tr>
           <tr>
             <td>Description</td>
