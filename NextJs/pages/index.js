@@ -11,7 +11,7 @@ import { Dropdown } from "react-bootstrap";
 const holacashApiBaseUrl = "https://sandbox.api.holacash.mx/v2";
 
 const holacashConnectWidgetScript =
-  "https://widget.connect.sandbox.holacash.mx/connect.min.js";
+"https://widget.connect.sandbox.holacash.mx/connect.min.js";
 
 // Copy and paste your key here to use it in all configs across this sample site
 const merchantPublicKey =
@@ -138,16 +138,10 @@ export default function Home() {
 
         <DropdownMenu />
 
-        {/* Creating Button object.  */}
-        <div id="instant-holacash-checkout-button">
-          {/* The checkout widget requires an order id this is why we the button after knowing the order.*/}
-          {!orderLoading && orderId ? (
-            <object
-              id="checkout-button"
-              data={`${holacashApiBaseUrl}/checkout/button?public_key=${merchantPublicKey}`}
-            />
-          ) : null}
-        </div>
+        {/* Creating Button object  */}
+        <div
+          id="checkout-button"
+          data-disabled={orderLoading || !orderId } />
       </header>
       <Modal isOpen={receiptVisible} className="receipt">
         <Receipt response={successResponse} />

@@ -129,16 +129,9 @@ function App() {
         <DropdownMenu />
 
         {/* Creating Button object  */}
-        <div id="instant-holacash-checkout-button">
-          {/* The checkout widget requires an order id this is why we the button after knowing the order.*/}
-
-          {!orderLoading && orderId ? (
-            <object
-              id="checkout-button"
-              data={`${holacashApiBaseUrl}/checkout/button?public_key=${merchantPublicKey}`}
-            />
-          ) : null}
-        </div>
+        <div
+          id="checkout-button"
+          data-disabled={orderLoading || !orderId } />
       </header>
       <Modal isOpen={receiptVisible} className="receipt">
         <Receipt response={successResponse} />
