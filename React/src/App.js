@@ -130,14 +130,11 @@ function App() {
 
         {/* Creating Button object  */}
         <div id="instant-holacash-checkout-button">
-          {/* The checkout widget requires an order id this is why we the button after knowing the order.*/}
-
-          {!orderLoading && orderId ? (
-            <object
-              id="checkout-button"
-              data={`${holacashApiBaseUrl}/checkout/button?public_key=${merchantPublicKey}`}
-            />
-          ) : null}
+          <object
+            id="checkout-button"
+            data={`${holacashApiBaseUrl}/checkout/button?public_key=${merchantPublicKey}`}
+            data-disabled={orderLoading || !orderId }
+          />
         </div>
       </header>
       <Modal isOpen={receiptVisible} className="receipt">

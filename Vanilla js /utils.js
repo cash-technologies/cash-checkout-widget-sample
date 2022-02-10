@@ -21,6 +21,7 @@ const menu = [
 
 // Creating an order https://developers.holacash.mx/openapi/cash/#tag/order
 const generateOrder = async (item) => {
+  document?.getElementById('checkout-button')?.setAttribute('data-disabled', true);
   try {
     const response = await axios.post(
       "https://sandbox.api.holacash.mx/v2/order",
@@ -42,6 +43,7 @@ const generateOrder = async (item) => {
 
     // verifying correct response from create order
     if (response?.data?.order_information?.order_id) {
+      document?.getElementById('checkout-button')?.setAttribute('data-disabled', false);
       let orderId = response?.data?.order_information?.order_id;
       console.log("ORDER ID:", response?.data?.order_information?.order_id);
 
