@@ -13,7 +13,7 @@ import Receipt from "./receipt";
 const holacashApiBaseUrl = "https://sandbox.api.holacash.mx/v2";
 
 const merchantPublicKey =
-  "pub_sandbox_N3JQzyuR.VXjgMrW90DWWfwbd2eerxDA3mSG7uVdR";
+"pub_sandbox_N3JQzyuR.VXjgMrW90DWWfwbd2eerxDA3mSG7uVdR";
 
 export const menu = [
   { id: 1, name: "Margherita Pizza", price: 599 },
@@ -110,7 +110,15 @@ function App() {
         // eslint-disable-next-line no-undef
         HolaCashCheckout.configure(
           { order_id: response?.data?.order_information?.order_id },
-          callbacks
+          callbacks,
+          {},
+          {
+            firstName: 'Gaurav',
+            middleName: 'Ahuja',
+            lastName: 'Ahuja',
+            email: 'gauravahuja.me@gmail.com',
+            phone: '13212312412'
+          }
         );
       }
     } catch {
