@@ -111,12 +111,11 @@ function App() {
         HolaCashCheckout.configure(
           { order_id: response?.data?.order_information?.order_id },
           callbacks,
-          {},
           {
-            firstName: 'Gaurav',
-            lastName: 'Ahuja',
-            secondLastName: 'Ahuja',
-            email: 'gauravahuja.me@gmail.com',
+            firstName: 'John',
+            lastName: 'Doe',
+            secondLastName: 'Doe',
+            email: 'john.doe@gmail.com',
             phone: '13212312412'
           }
         );
