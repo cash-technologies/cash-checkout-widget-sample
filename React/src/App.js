@@ -114,8 +114,8 @@ function App() {
           {},
           {
             firstName: 'Gaurav',
-            middleName: 'Ahuja',
             lastName: 'Ahuja',
+            secondLastName: 'Ahuja',
             email: 'gauravahuja.me@gmail.com',
             phone: '13212312412'
           }
