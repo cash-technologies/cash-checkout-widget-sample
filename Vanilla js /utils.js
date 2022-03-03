@@ -58,16 +58,27 @@ const generateOrder = async (item) => {
           console.log("onSuccess", JSON.parse(res));
         },
         //onAbort happens when the users intentionally close the widget
-
         onAbort: () => {
           alert("Widget is closing");
           document.getElementById(
             "instant-holacash-checkout-button"
           ).style.display = "none";
         },
-        //on Error happens when the holacash service cannot succesfully generate a charge correctly at that moment
 
-        onError: (err) => alert(JSON.stringify(err)),
+        // on Error happens when the holacash service cannot succesfully generate a charge correctly at that moment
+        onError: (err) => console.log(JSON.stringify(err)),
+
+        // onEmailEntered is called when the user completes entering an email
+        onEmailEntered: (email) => console.log(email),
+
+        // onCheckoutStart is called when the checkout page is presented
+        onCheckoutStart: () => console.log('checkout started'),
+
+        // We will use the check callback to determine if Cash Pay should proceed.
+        // This must return a boolean
+        check: () => {
+          return true;
+        },
       };
 
       // Initializing widget with order information
