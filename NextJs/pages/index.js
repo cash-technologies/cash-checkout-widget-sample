@@ -90,25 +90,47 @@ export default function Home() {
       if (response?.data?.order_information?.order_id) {
         setOrderId(response?.data?.order_information?.order_id);
         console.log("ORDER ID:", response?.data?.order_information?.order_id);
-        //callbacks can be passed into the widget configuration this are triggered whenever a certain event happens.
+        // callbacks can be passed into the widget configuration this are triggered whenever a certain event happens.
         const callbacks = {
-          //onSuccess happens when a charge is created correctly.
+
+          // onSuccess happens when a charge is created correctly.
           onSuccess: (res) => {
             setSuccessResponse(JSON.parse(res));
             setReceiptVisible(true);
             console.log("onSuccess", JSON.parse(res));
           },
-          //onAbort happens when the users intentionally close the widget
+
+          // onAbort happens when the users intentionally close the widget
           onAbort: () => console.log("onAbort callback"),
-          //on Error happens when the holacash service cannot succesfully generate a charge correctly at that moment
+
+          // on Error happens when the holacash service cannot succesfully generate a charge correctly at that moment
           onError: (err) => console.log(JSON.stringify(err)),
+
+          // onEmailEntered is called when the user completes entering an email
+          onEmailEntered: (email) => console.log(email),
+
+          // onCheckoutStart is called when the checkout page is presented
+          onCheckoutStart: () => console.log('checkout started'),
+
+          // We will use the check callback to determine if Cash Pay should proceed.
+          // This must return a boolean
+          check: () => {
+            return true;
+          },
         };
 
         // Initializing widget with order information
         // eslint-disable-next-line no-undef
         HolaCashCheckout.configure(
           { order_id: response?.data?.order_information?.order_id },
-          callbacks
+          callbacks,
+          {
+            firstName: 'John',
+            lastName: 'Doe',
+            secondLastName: 'Doe',
+            email: 'john.doe@gmail.com',
+            phone: '13212312412'
+          }
         );
       }
     } catch {
