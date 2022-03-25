@@ -15,7 +15,7 @@ const holacashConnectWidgetScript =
 
 // Copy and paste your key here to use it in all configs across this sample site
 const merchantPublicKey =
-  "pub_sandbox_N3JQzyuR.VXjgMrW90DWWfwbd2eerxDA3mSG7uVdR"; // public key
+"pub_sandbox_N3JQzyuR.VXjgMrW90DWWfwbd2eerxDA3mSG7uVdR"; // public key
 
 export const menu = [
   { id: 1, name: "Margherita Pizza", price: 599 },
@@ -122,15 +122,17 @@ export default function Home() {
         // Initializing widget with order information
         // eslint-disable-next-line no-undef
         HolaCashCheckout.configure(
-          { order_id: response?.data?.order_information?.order_id },
-          callbacks,
           {
-            firstName: 'John',
-            lastName: 'Doe',
-            secondLastName: 'Doe',
-            email: 'john.doe@gmail.com',
-            phone: '13212312412'
-          }
+            order_id: response?.data?.order_information?.order_id,
+            hints: {
+              first_name: 'John',
+              last_name: 'Doe',
+              second_last_name: 'Doe',
+              email: 'john.doe@gmail.com',
+              phone: '13212312412'
+            },
+          },
+          callbacks
         );
       }
     } catch {

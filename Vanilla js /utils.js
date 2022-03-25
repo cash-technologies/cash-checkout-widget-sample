@@ -84,15 +84,17 @@ const generateOrder = async (item) => {
       // Initializing widget with order information
       // eslint-disable-next-line no-undef
       HolaCashCheckout.configure(
-        { order_id: response?.data?.order_information?.order_id },
-        callbacks,
         {
-          firstName: 'John',
-          lastName: 'Doe',
-          secondLastName: 'Doe',
-          email: 'john.doe@gmail.com',
-          phone: '13212312412'
-        }
+          order_id: response?.data?.order_information?.order_id,
+          hints: {
+            first_name: 'John',
+            last_name: 'Doe',
+            second_last_name: 'Doe',
+            email: 'john.doe@gmail.com',
+            phone: '13212312412'
+          },
+        },
+        callbacks
       );
 
       showWidget();
