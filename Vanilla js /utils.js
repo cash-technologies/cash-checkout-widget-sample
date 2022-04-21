@@ -13,10 +13,10 @@ function updateSelected(data) {
 }
 
 const menu = [
-  { id: 1, name: "Margherita Pizza", price: 599 },
-  { id: 2, name: "Marinara Pizza", price: 699 },
-  { id: 3, name: "Hawaiian Pizza", price: 649 },
-  { id: 4, name: "Pepperoni Pizza", price: 749 },
+  { id: 1, name: "Margherita Pizza", price: 1599 },
+  { id: 2, name: "Marinara Pizza", price: 1699 },
+  { id: 3, name: "Hawaiian Pizza", price: 1649 },
+  { id: 4, name: "Pepperoni Pizza", price: 1749 },
 ];
 
 // Copy and paste your public key here
