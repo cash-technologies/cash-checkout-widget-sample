@@ -12,8 +12,8 @@ import Receipt from "./receipt";
 // Base url for holacash api environment
 const holacashApiBaseUrl = "https://sandbox.api.holacash.mx/v2";
 
-const merchantPublicKey =
-"pub_sandbox_N3JQzyuR.VXjgMrW90DWWfwbd2eerxDA3mSG7uVdR";
+// Copy and paste your public key here
+const HOLACASH_PUBLIC_KEY = "<obtain it from your merchant portal account>";
 
 export const menu = [
   { id: 1, name: "Margherita Pizza", price: 599 },
@@ -76,7 +76,7 @@ function App() {
         },
         {
           headers: {
-            "X-Api-Client-Key": merchantPublicKey,
+            "X-Api-Client-Key": HOLACASH_PUBLIC_KEY,
             "Content-Type": "application/json",
           },
         }
@@ -91,7 +91,6 @@ function App() {
         //callbacks can be passed into the widget configuration this are triggered whenever a certain event happens.
 
         const callbacks = {
-
           // onSuccess happens when a charge is created correctly.
           onSuccess: (res) => {
             setSuccessResponse(JSON.parse(res));
@@ -109,7 +108,7 @@ function App() {
           onEmailEntered: (email) => console.log(email),
 
           // onCheckoutStart is called when the checkout page is presented
-          onCheckoutStart: () => console.log('checkout started'),
+          onCheckoutStart: () => console.log("checkout started"),
 
           // We will use the check callback to determine if Cash Pay should proceed.
           // This must return a boolean
@@ -124,11 +123,11 @@ function App() {
           {
             order_id: response?.data?.order_information?.order_id,
             hints: {
-              first_name: 'John',
-              last_name: 'Doe',
-              second_last_name: 'Doe',
-              email: 'john.doe@gmail.com',
-              phone: '13212312412'
+              first_name: "John",
+              last_name: "Doe",
+              second_last_name: "Doe",
+              email: "john.doe@gmail.com",
+              phone: "13212312412",
             },
           },
           callbacks
@@ -153,8 +152,8 @@ function App() {
         <div id="instant-holacash-checkout-button">
           <object
             id="checkout-button"
-            data={`${holacashApiBaseUrl}/checkout/button?public_key=${merchantPublicKey}`}
-            data-disabled={orderLoading || !orderId }
+            data={`${holacashApiBaseUrl}/checkout/button?public_key=${HOLACASH_PUBLIC_KEY}`}
+            data-disabled={orderLoading || !orderId}
           />
         </div>
       </header>
