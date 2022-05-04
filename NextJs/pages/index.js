@@ -11,11 +11,10 @@ import { Dropdown } from "react-bootstrap";
 const holacashApiBaseUrl = "https://sandbox.api.holacash.mx/v2";
 
 const holacashConnectWidgetScript =
-"https://widget.connect.sandbox.holacash.mx/connect.min.js";
+  "https://widget.connect.sandbox.holacash.mx/connect.min.js";
 
-// Copy and paste your key here to use it in all configs across this sample site
-const merchantPublicKey =
-"pub_sandbox_N3JQzyuR.VXjgMrW90DWWfwbd2eerxDA3mSG7uVdR"; // public key
+// Copy and paste your public key here to use it in all configs across this sample site
+const HOLACASH_PUBLIC_KEY = "<obtain it from your merchant portal account>"; // public key
 
 export const menu = [
   { id: 1, name: "Margherita Pizza", price: 599 },
@@ -78,7 +77,7 @@ export default function Home() {
         },
         {
           headers: {
-            "X-Api-Client-Key": merchantPublicKey,
+            "X-Api-Client-Key": HOLACASH_PUBLIC_KEY,
             "Content-Type": "application/json",
           },
         }
@@ -92,7 +91,6 @@ export default function Home() {
         console.log("ORDER ID:", response?.data?.order_information?.order_id);
         // callbacks can be passed into the widget configuration this are triggered whenever a certain event happens.
         const callbacks = {
-
           // onSuccess happens when a charge is created correctly.
           onSuccess: (res) => {
             setSuccessResponse(JSON.parse(res));
@@ -110,7 +108,7 @@ export default function Home() {
           onEmailEntered: (email) => console.log(email),
 
           // onCheckoutStart is called when the checkout page is presented
-          onCheckoutStart: () => console.log('checkout started'),
+          onCheckoutStart: () => console.log("checkout started"),
 
           // We will use the check callback to determine if Cash Pay should proceed.
           // This must return a boolean
@@ -125,11 +123,11 @@ export default function Home() {
           {
             order_id: response?.data?.order_information?.order_id,
             hints: {
-              first_name: 'John',
-              last_name: 'Doe',
-              second_last_name: 'Doe',
-              email: 'john.doe@gmail.com',
-              phone: '13212312412'
+              first_name: "John",
+              last_name: "Doe",
+              second_last_name: "Doe",
+              email: "john.doe@gmail.com",
+              phone: "13212312412",
             },
           },
           callbacks
@@ -150,7 +148,7 @@ export default function Home() {
       {/* adding Script using Next Script*/}
       <Script
         src={holacashConnectWidgetScript}
-        data-public-key={merchantPublicKey}
+        data-public-key={HOLACASH_PUBLIC_KEY}
         id="holacash-connect"
         strategy="beforeInteractive"
       />
@@ -166,8 +164,8 @@ export default function Home() {
         <div id="instant-holacash-checkout-button">
           <object
             id="checkout-button"
-            data={`${holacashApiBaseUrl}/checkout/button?public_key=${merchantPublicKey}`}
-            data-disabled={orderLoading || !orderId }
+            data={`${holacashApiBaseUrl}/checkout/button?public_key=${HOLACASH_PUBLIC_KEY}`}
+            data-disabled={orderLoading || !orderId}
           />
         </div>
       </header>

@@ -24,13 +24,15 @@
       Adding the holacash script on index.html 
       https://developers.holacash.mx/widget/quickguide
     -->
-
+    <!--
+      Obtain your public key from the merchant portal and paste it to data-public-key="your key"
+    -->
     <script
       async
       src="https://widget.connect.sandbox.holacash.mx/connect.min.js"
       id="holacash-connect"
       type="text/javascript"
-      data-public-key="pub_sandbox_N3JQzyuR.VXjgMrW90DWWfwbd2eerxDA3mSG7uVdR"
+      data-public-key="paste your public key here, can be obtained from your merchant portal"
     ></script>
 
     <script src="utils.js" type="text/javascript"></script>
@@ -90,10 +92,13 @@
         </div>
       </div>
 
+      <!--
+      Obtain your public key from the merchant portal and paste it to public-key="your key"
+    -->
       <div class="py-4" id="instant-holacash-checkout-button">
         <object
           id="checkout-button"
-          data="https://sandbox.api.holacash.mx/v2/checkout/button?public_key=pub_sandbox_N3JQzyuR.VXjgMrW90DWWfwbd2eerxDA3mSG7uVdR"
+          data="https://sandbox.api.holacash.mx/v2/checkout/button?public_key={paste your public key, can be obtained from your merchant portal}"
           data-disabled="{false}"
         />
       </div>

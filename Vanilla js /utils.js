@@ -19,9 +19,14 @@ const menu = [
   { id: 4, name: "Pepperoni Pizza", price: 749 },
 ];
 
+// Copy and paste your public key here
+const HOLACASH_PUBLIC_KEY = "<obtain it from your merchant portal account>";
+
 // Creating an order https://developers.holacash.mx/openapi/cash/#tag/order
 const generateOrder = async (item) => {
-  document?.getElementById('checkout-button')?.setAttribute('data-disabled', true);
+  document
+    ?.getElementById("checkout-button")
+    ?.setAttribute("data-disabled", true);
   try {
     const response = await axios.post(
       "https://sandbox.api.holacash.mx/v2/order",
@@ -34,8 +39,7 @@ const generateOrder = async (item) => {
       },
       {
         headers: {
-          "X-Api-Client-Key":
-            "pub_sandbox_N3JQzyuR.VXjgMrW90DWWfwbd2eerxDA3mSG7uVdR",
+          "X-Api-Client-Key": HOLACASH_PUBLIC_KEY,
           "Content-Type": "application/json",
         },
       }
@@ -43,7 +47,9 @@ const generateOrder = async (item) => {
 
     // verifying correct response from create order
     if (response?.data?.order_information?.order_id) {
-      document?.getElementById('checkout-button')?.setAttribute('data-disabled', false);
+      document
+        ?.getElementById("checkout-button")
+        ?.setAttribute("data-disabled", false);
       let orderId = response?.data?.order_information?.order_id;
       console.log("ORDER ID:", response?.data?.order_information?.order_id);
 
@@ -72,7 +78,7 @@ const generateOrder = async (item) => {
         onEmailEntered: (email) => console.log(email),
 
         // onCheckoutStart is called when the checkout page is presented
-        onCheckoutStart: () => console.log('checkout started'),
+        onCheckoutStart: () => console.log("checkout started"),
 
         // We will use the check callback to determine if Cash Pay should proceed.
         // This must return a boolean
@@ -87,13 +93,14 @@ const generateOrder = async (item) => {
         {
           order_id: response?.data?.order_information?.order_id,
           hints: {
-            first_name: 'John',
-            last_name: 'Doe',
-            second_last_name: 'Doe',
-            email: 'john.doe@gmail.com',
-            phone: '13212312412'
+            first_name: "John",
+            last_name: "Doe",
+            second_last_name: "Doe",
+            email: "john.doe@gmail.com",
+            phone: "13212312412",
           },
         },
+        { order_id: response?.data?.order_information?.order_id },
         callbacks
       );
 
