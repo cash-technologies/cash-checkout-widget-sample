@@ -13,7 +13,7 @@ import Receipt from "./receipt";
 const holacashApiBaseUrl = "https://sandbox.api.holacash.mx/v2";
 
 // Copy and paste your public key here
-const HOLACASH_PUBLIC_KEY = "<obtain it from your merchant portal account>";
+const HOLACASH_PUBLIC_KEY = process.env.REACT_APP_MERCHANT_PUBLIC_KEY;
 
 export const menu = [
   { id: 1, name: "Margherita Pizza", price: 599 },
