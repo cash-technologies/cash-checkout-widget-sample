@@ -168,6 +168,13 @@ export default function Home() {
             data-disabled={orderLoading || !orderId}
           />
         </div>
+        <button
+          className="btn btn-dark mx-auto my-10"
+          onClick={() => {
+            HolaCashCheckout.initiateCheckout();
+          }}>
+          Pay Now
+        </button>
       </header>
       <Modal isOpen={receiptVisible} className="receipt">
         <Receipt response={successResponse} />
