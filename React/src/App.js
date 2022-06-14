@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useEffect, useState } from "react";
@@ -156,6 +157,13 @@ function App() {
             data-disabled={orderLoading || !orderId}
           />
         </div>
+        <button
+          className="btn btn-dark mx-auto my-10"
+          onClick={() => {
+            HolaCashCheckout.initiateCheckout();
+          }}>
+          Pay Now
+        </button>
       </header>
       <Modal isOpen={receiptVisible} className="receipt">
         <Receipt response={successResponse} />
