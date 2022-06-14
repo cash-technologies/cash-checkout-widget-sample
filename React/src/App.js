@@ -157,13 +157,20 @@ function App() {
             data-disabled={orderLoading || !orderId}
           />
         </div>
-        <button
-          className="btn btn-dark mx-auto my-10"
-          onClick={() => {
-            HolaCashCheckout.initiateCheckout();
-          }}>
-          Pay Now
-        </button>
+        {orderId && (
+          <>
+            <div className="customBtnLabel">Custom button:</div>
+
+            <button
+              className="customPayButton"
+              onClick={() => {
+                HolaCashCheckout.initiateCheckout();
+              }}
+            >
+              Pay Now
+            </button>
+          </>
+        )}
       </header>
       <Modal isOpen={receiptVisible} className="receipt">
         <Receipt response={successResponse} />

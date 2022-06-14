@@ -92,6 +92,14 @@
         </div>
       </div>
 
+      <div id="customBtnLabel">Custom button:</div>
+      <button
+        id="customButtonTriggerWidgetOpen"
+        class="customPayButton"
+        onClick="openWidget"
+      >
+        Pay Now
+      </button>
       <!--
       Obtain your public key from the merchant portal and paste it to public-key="your key"
     -->
@@ -102,6 +110,12 @@
           data-disabled="{false}"
         />
       </div>
+
+      <script>
+        function openWidget() {
+          HolaCashCheckout.initiateCheckout();
+        }
+      </script>
     </div>
   </body>
 </html>

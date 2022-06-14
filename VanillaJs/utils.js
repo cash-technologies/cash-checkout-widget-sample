@@ -20,7 +20,8 @@ const menu = [
 ];
 
 // Copy and paste your public key here
-const HOLACASH_PUBLIC_KEY = "<obtain it from your merchant portal account>";
+const HOLACASH_PUBLIC_KEY =
+  "pub_sandbox_N3JQzyuR.VXjgMrW90DWWfwbd2eerxDA3mSG7uVdR";
 
 // Creating an order https://developers.holacash.mx/openapi/cash/#tag/order
 const generateOrder = async (item) => {
@@ -104,6 +105,10 @@ const generateOrder = async (item) => {
         callbacks
       );
 
+      // displaying custom button elements when order is ready
+      document.getElementById("customButtonTriggerWidgetOpen").style.display =
+        "block";
+      document.getElementById("customBtnLabel").style.display = "block";
       showWidget();
     }
   } catch (e) {

@@ -90,3 +90,24 @@ tr:nth-child(even) {
   align-items: "center";
   justify-content: "center";
 }
+
+.customPayButton {
+  margin: 0 auto;
+  background-color: #191f2c;
+  color: white;
+  border: 1px solid white;
+  border-radius: 50px;
+  padding: 10px;
+  font-size: 12px;
+  border: none;
+  cursor: pointer;
+  width: 180px;
+}
+
+.customBtnLabel {
+  margin: 0 auto;
+  margin-top: 30px;
+  color: white;
+  padding: 5px;
+  font-size: 14px;
+}
