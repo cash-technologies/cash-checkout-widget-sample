@@ -64,6 +64,9 @@ const generateOrder = async (item) => {
           showReceipt(JSON.parse(res));
           console.log("onSuccess", JSON.parse(res));
         },
+        onComplete: (res) => {
+          console.log("onComplete", JSON.parse(res));
+        },
         //onAbort happens when the users intentionally close the widget
         onAbort: () => {
           alert("Widget is closing");
