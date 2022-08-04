@@ -58,6 +58,9 @@ export default function WidgetCheckout({
           if (onSuccess) onSuccess(res); // executes onSuccess callback
           console.log("onSuccess", JSON.parse(res));
         },
+        onComplete: (res : any) => {
+          console.log("onComplete", JSON.parse(res));
+        },
         onAbort: () => console.log("onAbort callback"),
         onError: (err: any) => console.log(JSON.stringify(err)),
         onEmailEntered: (email: string) => console.log(email),
