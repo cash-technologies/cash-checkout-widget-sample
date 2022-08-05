@@ -100,13 +100,18 @@ function App() {
           },
           onComplete: (res) => {
             console.log("onComplete", JSON.parse(res));
+            // remove comment to close widget automatically when a charge is completed
+            // HolaCashCheckout.closeCheckout()
           },
           // onAbort happens when the users intentionally close the widget
           onAbort: () => console.log("onAbort callback"),
 
-          // onError happens when the holacash service cannot succesfully generate a charge correctly at that moment
-          onError: (err) => console.log(JSON.stringify(err)),
-
+          // onError happens when the holacash service cannot successfully generate a charge correctly at that moment
+          onError: (err) => {
+            console.log(JSON.stringify(err));
+            // remove comment to close widget automatically when a charge fails
+            // HolaCashCheckout.closeCheckout()
+          },
           // onEmailEntered is called when the user completes entering an email
           onEmailEntered: (email) => console.log(email),
 

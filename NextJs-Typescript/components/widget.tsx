@@ -60,9 +60,15 @@ export default function WidgetCheckout({
         },
         onComplete: (res : any) => {
           console.log("onComplete", JSON.parse(res));
+          // remove comment to close widget automatically when a charge is completed 
+          // HolaCashCheckout.closeCheckout() 
         },
         onAbort: () => console.log("onAbort callback"),
-        onError: (err: any) => console.log(JSON.stringify(err)),
+        onError: (err: any) => {
+          console.log(JSON.stringify(err))
+          // remove comment to close widget automatically when a charge fails 
+          // HolaCashCheckout.closeCheckout() 
+        } ,
         onEmailEntered: (email: string) => console.log(email),
         onCheckoutStart: () => console.log("checkout started"),
         check: () => {
