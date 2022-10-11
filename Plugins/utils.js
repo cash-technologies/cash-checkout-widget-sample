@@ -19,15 +19,9 @@ const menu = [
   { id: 4, name: "Pepperoni Pizza", price: 1749 },
 ];
 
-// Copy and paste your public key here
-const HOLACASH_PUBLIC_KEY =
-  "pub_sandbox_N3JQzyuR.VXjgMrW90DWWfwbd2eerxDA3mSG7uVdR";
-
 // Creating an order https://developers.holacash.mx/openapi/cash/#tag/order
 const generateOrder = async (item) => {
-  document
-    ?.getElementById("checkout-button")
-    ?.setAttribute("data-disabled", true);
+  document?.getElementById('checkout-button')?.setAttribute('data-disabled', true);
   try {
     const response = await axios.post(
       "https://sandbox.api.holacash.mx/v2/order",
@@ -40,7 +34,8 @@ const generateOrder = async (item) => {
       },
       {
         headers: {
-          "X-Api-Client-Key": HOLACASH_PUBLIC_KEY,
+          "X-Api-Client-Key":
+          "<PUT YOUR PUB KEY HERE>",
           "Content-Type": "application/json",
         },
       }
@@ -48,9 +43,7 @@ const generateOrder = async (item) => {
 
     // verifying correct response from create order
     if (response?.data?.order_information?.order_id) {
-      document
-        ?.getElementById("checkout-button")
-        ?.setAttribute("data-disabled", false);
+      document?.getElementById('checkout-button')?.setAttribute('data-disabled', false);
       let orderId = response?.data?.order_information?.order_id;
       console.log("ORDER ID:", response?.data?.order_information?.order_id);
 
@@ -64,30 +57,19 @@ const generateOrder = async (item) => {
           showReceipt(JSON.parse(res));
           console.log("onSuccess", JSON.parse(res));
         },
-        onComplete: (res) => {
-          console.log("onComplete", JSON.parse(res));
-          // remove comment to close widget automatically when a charge is completed
-          // HolaCashCheckout.closeCheckout()
-        },
         //onAbort happens when the users intentionally close the widget
         onAbort: () => {
           alert("Widget is closing");
-          document.getElementById(
-            "instant-holacash-checkout-button"
-          ).style.display = "none";
         },
 
         // on Error happens when the holacash service cannot succesfully generate a charge correctly at that moment
-        onError: (err) => {
-          // remove comment to close widget automatically when a charge fails
-          // HolaCashCheckout.closeCheckout();
-          console.log(JSON.stringify(err));
-        },
+        onError: (err) => console.log(JSON.stringify(err)),
+
         // onEmailEntered is called when the user completes entering an email
         onEmailEntered: (email) => console.log(email),
 
         // onCheckoutStart is called when the checkout page is presented
-        onCheckoutStart: () => console.log("checkout started"),
+        onCheckoutStart: () => console.log('checkout started'),
 
         // We will use the check callback to determine if Cash Pay should proceed.
         // This must return a boolean
@@ -102,20 +84,17 @@ const generateOrder = async (item) => {
         {
           order_id: response?.data?.order_information?.order_id,
           hints: {
-            first_name: "John",
-            last_name: "Doe",
-            second_last_name: "Doe",
-            email: "john.doe@gmail.com",
-            phone: "13212312412",
+            first_name: 'John',
+            last_name: 'Doe',
+            second_last_name: 'Doe',
+            email: 'john.doe@gmail.com',
+            phone: '13212312412'
           },
+          source: 'plugin.magento/1.0', // Use 'plugin.woocommerce/1.0' for woocommerce
         },
         callbacks
       );
 
-      // displaying custom button elements when order is ready
-      document.getElementById("customButtonTriggerWidgetOpen").style.display =
-        "block";
-      document.getElementById("customBtnLabel").style.display = "block";
       showWidget();
     }
   } catch (e) {
@@ -129,8 +108,6 @@ function showReceipt(res) {
   console.log(res);
   if (res.charge) {
     document.getElementById("receipt").style.display = "block";
-    document.getElementById("instant-holacash-checkout-button").style.display =
-      "none";
   }
   document.getElementById("chargeId").innerHTML = res.id;
   document.getElementById("statusResponse").innerHTML =
@@ -142,14 +119,10 @@ function showReceipt(res) {
 
 function closeReceipt() {
   document.getElementById("receipt").style.display = "none";
-  document.getElementById("instant-holacash-checkout-button").style.display =
-    "block";
 }
 
 // shows widgetButton when order is ready
 function showWidget() {
-  document.getElementById("instant-holacash-checkout-button").style.display =
-    "block";
 }
 
 // Close the dropdown menu if the user clicks outside of it
